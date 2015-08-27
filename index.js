@@ -1,9 +1,41 @@
 #!/usr/bin/env node
 var assert = require('assert-plus')
 
-module.exports = function (obj, schema) {
+function validator (obj, schema, path) {
+	assert.object(obj, 'Object to be validate');
+	assert.object(schema, 'Schema used to validate');
+	path = path || '';
 
 	var errors = [];
+
+	// handle array
+	if(schema.type === 'array') {
+
+		// validate type
+		if(!Array.isArray(obj)) {
+			errors.push('validate type failed for ' + prefix(path || 'Array', i));
+			return errors;
+		}
+
+		// validate nested array
+		if(schema.elemSchema && obj.length) {
+			obj.forEach(function(elem, i) {
+				errors = errors.concat(validator(elem, schema.elemSchema, prefix(path || 'Array', i)));
+			});
+			return errors;
+		} 
+
+		// validate simple array
+		if (schema.elemType && obj.length) {
+			obj.forEach(function(elem, i) {
+				if(typeof(elem) !== schema.elemType) {
+					errors.push('validate type failed for ' + prefix(path || 'Array', i));
+				}
+			});
+			return errors;
+		}
+
+	}
 
 	for(var key in schema) {
 
@@ -23,55 +55,26 @@ module.exports = function (obj, schema) {
 			continue;
 		}
 
-		// check allowed
-		if(!isAllowedValue(value)) {
-			errors.push(key + ' is not exist');
+		// check allowed && existed
+		if(!isExist(value, type)) {
+			errors.push('validate exist failed for ' + prefix(path, key));
 			continue;
-		}
-
-		// handle array
-		if(type === 'array') {
-
-			// validate type
-			if(!Array.isArray(value)) {
-				errors.push(key + 'is not an array');
-				continue;
-			}
-
-			// validate nested array
-			if(elemSchema && value.length) {
-				value.forEach(function(elem) {
-					errors = errors.concat(validator(elem, elemSchema));
-				});
-				continue;
-			} 
-
-			// validate simple array
-			if (elemType && value.length) {
-				obj[key].forEach(function(elem, i) {
-					if(typeof(elem) !== schema[key]['elem_type']) {
-						errors.push('validate failed for ' + key + ':' + i);
-					}
-				});
-				continue;
-			}
-
 		}
 
 		// handle nested object
 		if(typeof(value) === 'object') {
-			errors = errors.concat(validator(value, schema[key]));
+			errors = errors.concat(validator(value, schema[key], prefix(path, key)));
 			continue;
 		}
 
 		// check for type
 		if(type && typeof(value) !== type) {
-			errors.push('validate type failed for ' + key);
+			errors.push('validate type failed for ' + prefix(path, key));
 		}
 
 		// check for exist
-		if(required && isExist(value, type)) {
-			errors.push('validate value failed for ' + key);
+		if(!(required && isExist(value, type))) {
+			errors.push('validate value failed for ' + prefix(path, key));
 		}
 
 	}
@@ -86,9 +89,17 @@ function isAllowedValue (value) {
 				 value === false;
 }
 
-function isExist(value, type) {
+function isExist (value, type) {
 	return !!value || 
 					(value === 0 && type === 'number') ||
 					(value === '' && type === 'string') ||
 					(value === false && type === 'boolean');
 }
+
+function prefix (prefix, key) {
+	prefix = prefix || '';
+	key = key || '';
+	return  prefix ? (prefix + '.' + key) : key;
+}
+
+module.exports = validator;

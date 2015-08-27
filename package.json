@@ -5,7 +5,7 @@
   },
   "name": "validator-json",
   "version": "1.0.0",
-  "description": "Validator for object in javascript",
+  "description": "Validator for javascript object data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,5 +27,8 @@
   "homepage": "https://github.com/CocaCola183/validator#readme",
   "dependencies": {
     "assert-plus": "^0.1.5"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }
