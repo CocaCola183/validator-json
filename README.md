@@ -13,17 +13,17 @@ Only validate for:
 * type  
 * exist  
 
-##Install
+## Install  
 `npm install validator-json`
 
-##Usage
+## Usage
 
 ```
 var validator = require('validator-json');
 var errors = validator(obj, schema);
 ```
 
-##Example
+## Example
 ```
 var validator = require('validator-json');
 
@@ -87,7 +87,7 @@ console.log('object for not pass: \n', validator(object4npass, schema), '\n');
 if you want more example, you can see [this](https://github.com/CocaCola183/validator/blob/master/test/test.js)  
 
 
-##Note  
+## Note  
 Schema only accept 4 property:  
 * type  
 * required  
@@ -138,7 +138,7 @@ then you should set schema like this:
 }  
 ```
 
-##Test
+## Test
 npm test
 
 
