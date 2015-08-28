@@ -1,6 +1,6 @@
 # validator-json
 
-[![Build Status](https://travis-ci.org/CocaCola183/validator.svg)](https://travis-ci.org/CocaCola183/validator-json)
+[![Build Status](https://travis-ci.org/CocaCola183/validator-json.svg?branch=master)](https://travis-ci.org/CocaCola183/validator-json)
 
 
 All spirits come from [validate](https://www.npmjs.com/package/validate)  
