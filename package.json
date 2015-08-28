@@ -4,7 +4,7 @@
     "email": "s_f_dragon@163.com"
   },
   "name": "validator-json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validator for javascript object data",
   "main": "index.js",
   "scripts": {
