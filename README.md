@@ -1,6 +1,6 @@
 # validator-json
 
-[![npm version](http://img.shields.io/npm/v/validate-json.svg?style=flat)](https://npmjs.org/package/validate-json)
+[![npm version](https://img.shields.io/npm/v/validator-json.svg)](https://npmjs.org/package/validate-json)
 [![Build Status](https://travis-ci.org/CocaCola183/validator-json.svg?branch=master)](https://travis-ci.org/CocaCola183/validator-json)
 [![Coverage Status](https://coveralls.io/repos/CocaCola183/validator-json/badge.svg?branch=master&service=github)](https://coveralls.io/github/CocaCola183/validator-json?branch=master)
 
