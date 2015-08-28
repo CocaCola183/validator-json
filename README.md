@@ -2,39 +2,89 @@
 
 [![Build Status](https://travis-ci.org/CocaCola183/validator.svg)](https://travis-ci.org/CocaCola183/validator)
 
+
 All spirits come from [validate](https://www.npmjs.com/package/validate)  
 
-This module just fixed two issues:  
-* array(simple or nested) validate  
-* validate for number o, boolean false, string ''(you can see this [issue](https://github.com/eivindfjeldstad/validate/issues/23))
+This module just fixed two issues of [validate](https://www.npmjs.com/package/validate):  
+* array(simple or nested) validation  
+* validate for number 0, boolean false and string '' (you can see this [issue](https://github.com/eivindfjeldstad/validate/issues/23))
 
 Only validate for:  
 * type  
 * exist  
 
-##Example:  
-```js
-var string_schema = {  
-    string1: { type: 'string', required: true },  
-	string2: { type: 'string', required: true },  
-	string3: { type: 'string', required: true },  
-	string4: { type: 'string', required: true },  
-	string5: { type: 'string', required: false },  
-};  
-var string_obj = {  
-    string1: 'test',  
-	string2: '',  
-	string3: 123,  
-};  
-validator(string_obj, string_schema);  
+##install
+`npm install validator-json`
+
+##usage
+
+```
+var validator = require('validator-json');
+var errors = validator(obj, schema);
 ```
 
-this will return  
+##example
+```
+var validator = require('validator-json');
 
-`[ 'validate type failed for string3', 'validate exist failed for string4' ]`
+var schema = {
+	name: {
+		first_name: { type: 'string', required: true },
+		last_name: { type: 'string', required: true }
+	},
+	nickname: { type: 'string', required: false },
+	age: { type: 'number', required: true },
+	married: { type: 'boolean', required: true },
+	hobbies: { type: 'array', required: true, elemType: 'string'},
+	games_loved: { 
+		type: 'array',
+		required: true,
+		elemSchema: {
+			name: { type: 'string', required: true },
+			years_played: { type: 'number', required: true }
+		}
+	}
+}
 
-if you want more example, you can  see [this](https://github.com/CocaCola183/validator/blob/master/test/test.js)  
+var object4pass = {
+	name: {first_name: 'Xv', last_name: 'kivi'},
+	nickname: 'hammer',
+	age: 23,
+	married: false,
+	hobbies: ['computer games', 'basketball'],
+	games_loved: [
+		{
+			name: 'dota',
+			years_played: 4
+		},
+		{
+			name: 'lol',
+			years_played: 1
+		}
+	]
+}
 
+var object4npass = {
+	name: 'hello',
+	nickname: 999,
+	age: '23',
+	married: 'false',
+	hobbies: ['computer games', 999],
+	games_loved: [
+		{
+			name: 'dota'
+		},
+		{
+			years_played: 1
+		}
+	]
+}
+
+console.log('object for pass: \n', validator(object4pass, schema), '\n');
+console.log('object for not pass: \n', validator(object4npass, schema), '\n');
+```
+
+if you want more example, you can see [this](https://github.com/CocaCola183/validator/blob/master/test/test.js)  
 
 
 ##Note  
@@ -87,6 +137,9 @@ then you should set schema like this:
     }  
 }  
 ```
+
+##test
+npm test
 
 
 ## Licence

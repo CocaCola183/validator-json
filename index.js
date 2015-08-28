@@ -48,7 +48,7 @@ function validator (obj, schema, path) {
 		assert.optionalString(type, key + '.type');
 		assert.optionalBool(required, key + '.required');
 		assert.optionalString(elemType, key + '.elemType');
-		assert.optionalString(elemSchema, key + '.elemSchema');
+		assert.optionalObject(elemSchema, key + '.elemSchema');
 
 		// check if is required
 		if(required === false) {
@@ -97,8 +97,6 @@ function isExist (value, type) {
 }
 
 function prefix (prefix, key) {
-	prefix = prefix || '';
-	key = key || '';
 	return  prefix ? (prefix + '.' + key) : key;
 }
 
