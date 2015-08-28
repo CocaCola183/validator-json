@@ -13,17 +13,17 @@ Only validate for:
 * type  
 * exist  
 
-##install
+##Install
 `npm install validator-json`
 
-##usage
+##Usage
 
 ```
 var validator = require('validator-json');
 var errors = validator(obj, schema);
 ```
 
-##example
+##Example
 ```
 var validator = require('validator-json');
 
@@ -94,7 +94,7 @@ Schema only accept 4 property:
 * elemType  
 * elemSchema  
 
-elemType and elemSchema should not exist at the same time  
+`elemType` and `elemSchema` should not exist at the same time  
 
 if the object you want to validate like this:  
 `['some string', 'hello world']`  
@@ -138,7 +138,7 @@ then you should set schema like this:
 }  
 ```
 
-##test
+##Test
 npm test
 
 
