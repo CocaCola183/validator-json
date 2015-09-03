@@ -13,7 +13,8 @@ function validator (obj, schema, path) {
 
 		// validate type
 		if(!Array.isArray(obj)) {
-			errors.push('validate type failed for ' + prefix(path || 'Array', i));
+			var tmp_path = path === '' ? 'Array' : path;
+			errors.push('validate type failed for ' + tmp_path);
 			return errors;
 		}
 
@@ -26,7 +27,7 @@ function validator (obj, schema, path) {
 		} 
 
 		// validate simple array
-		if (schema.elemType && obj.length) {
+		if(schema.elemType && obj.length) {
 			obj.forEach(function(elem, i) {
 				if(typeof(elem) !== schema.elemType) {
 					errors.push('validate type failed for ' + prefix(path || 'Array', i));
@@ -37,6 +38,7 @@ function validator (obj, schema, path) {
 
 	}
 
+	// handle object
 	for(var key in schema) {
 
 		var type = schema[key]['type'];
@@ -80,13 +82,6 @@ function validator (obj, schema, path) {
 	}
 
 	return errors;
-}
-
-function isAllowedValue (value) {
-	return !!value ||
-				 value === 0 ||
-				 value === '' ||
-				 value === false;
 }
 
 function isExist (value, type) {

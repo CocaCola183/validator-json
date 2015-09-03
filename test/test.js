@@ -1,6 +1,7 @@
 var assert = require('assert-plus');
 var validator = require('..');
 
+// test for string validate
 var string_schema = {
 	string1: { type: 'string', required: true },
 	string2: { type: 'string', required: true },
@@ -24,6 +25,7 @@ describe('Test for string, include type, required and empty string', function() 
 	});
 });
 
+// test for number validate
 var number_schema = {
 	number1: { type: 'number', required: true },
 	number2: { type: 'number', required: true },
@@ -48,6 +50,8 @@ describe('Test for number, include type, required and empty string', function() 
 	});
 });
 
+
+// test for boolean validate 
 var boolean_schema = {
 	boolean1: { type: 'boolean', required: true },
 	boolean2: { type: 'boolean', required: true },
@@ -72,6 +76,8 @@ describe('Test for boolean, include type, required and empty string', function()
 	});
 });
 
+// test for array of simple type
+// --- validate for type
 var simple_array_shcema = {
 	type: 'array',
 	required: true,
@@ -89,6 +95,7 @@ describe('Test for simple array, include type, required and empty string', funct
 	});
 });
 
+// --- validate for array in object
 var simple_array_shcema1 = {
 	name: {
 		type: 'array',
@@ -108,6 +115,49 @@ describe('Test for simple array, include type, required and empty string', funct
 	});
 });
 
+// --- validate for array type
+var simple_array_schema_2 = {
+	type: 'array',
+	required: true,
+	elemType: 'string'
+};
+
+var simple_array_obj2 = {};
+
+var simple_array_expected_error2 = [ 'validate type failed for Array' ];
+
+describe('Test for simple array type', function() {
+	it('Should get errors like this: ' + JSON.stringify(simple_array_expected_error2), function() {
+		var errors = validator(simple_array_obj2, simple_array_schema_2);
+		if(!equalArray(errors, simple_array_expected_error2)) assert.fail(errors, simple_array_expected_error2, 'Test failed');
+	});
+});
+
+// --- validate for array type in object
+var simple_array_schema3 = {
+	string1: {type: 'string', required: true},
+	array1: {
+		type: 'array',
+		required: true,
+		elemType: 'string'
+	}
+};
+
+var simple_array_obj3 = {
+	string1: 'string',
+	array1: 'error'
+};
+
+var simple_array_expected_error3 = [ 'validate type failed for array1' ];
+
+describe('Test for simple array type in object', function() {
+	it('Shoule get errors like this: ' + JSON.stringify(simple_array_expected_error3), function() {
+		var errors = validator(simple_array_obj3, simple_array_schema3);
+		if(!equalArray(errors, simple_array_expected_error3)) assert.fail(errors, simple_array_expected_error3, 'Test failed');
+	});
+});
+
+// test for nested array
 var nested_array_schema = {
 	type: 'array',
 	required: true,
@@ -140,6 +190,7 @@ describe('Test for nested array, include type, required and empty string', funct
 	});
 });
 
+// test for object 
 var object_schema = {
 	obj1: {
 			obj1_1: {
@@ -169,7 +220,6 @@ describe('Test for object, include type, required and empty string', function() 
 	});
 });
 
-
 // console.log(validator(string_obj, string_schema));
 // console.log(validator(number_obj, number_schema));
 // console.log(validator(boolean_obj, boolean_schema));
@@ -177,9 +227,12 @@ describe('Test for object, include type, required and empty string', function() 
 // console.log(validator(simple_array_obj1, simple_array_shcema1));
 // console.log(validator(nested_array_obj, nested_array_schema));
 // console.log(validator(object_obj, object_schema));
+// console.log(validator(simple_array_obj2, simple_array_schema_2));
+// console.log(validator(simple_array_obj3, simple_array_schema3));
 
-
+// check two arrays equal or not
 function equalArray (arr1, arr2) {
+	if(arr1.length !== arr2.length) return false;
 	var tmp_obj = {};
 	arr1.forEach(function(elem) { tmp_obj[elem] = true; });
 	return arr2.every(function(elem) { return tmp_obj[elem]; });
