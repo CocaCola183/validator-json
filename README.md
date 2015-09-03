@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/validator-json.svg)](https://npmjs.org/package/validator-json)
 [![Build Status](https://travis-ci.org/CocaCola183/validator-json.svg?branch=master)](https://travis-ci.org/CocaCola183/validator-json)
 [![Coverage Status](https://coveralls.io/repos/CocaCola183/validator-json/badge.svg?branch=master&service=github)](https://coveralls.io/github/CocaCola183/validator-json?branch=master)
-[![https://img.shields.io/npm/dm/validator-json.svg]](https://npmjs.org/package/validator-json)
+[![npm downloads](https://img.shields.io/npm/dm/validator-json.svg)](https://npmjs.org/package/validator-json)  
 
 All spirits come from [validate](https://www.npmjs.com/package/validate)  
 
