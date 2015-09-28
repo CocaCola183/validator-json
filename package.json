@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha ./test/test.js",
     "cov": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/test.js -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "preInstall": "node ./scripts/preInstall.js"
+    "preinstall": "node ./scripts/preinstall.js"
   },
   "repository": {
     "type": "git",
