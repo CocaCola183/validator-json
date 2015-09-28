@@ -1,6 +1,8 @@
-var validator = require('..');
+'use strict';
 
-var schema = {
+let Validator = require('..');
+
+let schema = {
 	name: {
 		first_name: { type: 'string', required: true },
 		last_name: { type: 'string', required: true }
@@ -8,18 +10,14 @@ var schema = {
 	nickname: { type: 'string', required: false },
 	age: { type: 'number', required: true },
 	married: { type: 'boolean', required: true },
-	hobbies: { type: 'array', required: true, elemType: 'string'},
-	games_loved: { 
-		type: 'array',
-		required: true,
-		elemSchema: {
+	hobbies: [{ type: 'string', required: true }],
+	games_loved: [{
 			name: { type: 'string', required: true },
 			years_played: { type: 'number', required: true }
-		}
-	}
+		}]
 }
 
-var object4pass = {
+let object4pass = {
 	name: {first_name: 'Xv', last_name: 'kivi'},
 	nickname: 'hammer',
 	age: 23,
@@ -37,7 +35,7 @@ var object4pass = {
 	]
 }
 
-var object4npass = {
+let object4npass = {
 	name: 'hello',
 	nickname: 999,
 	age: '23',
@@ -53,6 +51,12 @@ var object4npass = {
 	]
 }
 
-console.log('object for pass: \n', validator(object4pass, schema), '\n');
-console.log('object for not pass: \n', validator(object4npass, schema), '\n');
+let passValidator = new Validator(object4pass, schema, 'object4npass');
+let passErrors = passValidator.validate();
+
+let npassValidator = new Validator(object4npass, schema, 'object4npass');
+let npassError = npassValidator.validate();
+
+console.log('object for pass: \n', passErrors, '\n');
+console.log('object for not pass: \n', npassError, '\n');
 
