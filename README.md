@@ -95,7 +95,7 @@ console.log('object for pass: \n', passErrors, '\n');
 console.log('object for not pass: \n', npassError, '\n');
 ```
 
-if you want more example, you can see [this](https://github.com/CocaCola183/validator/blob/master/test/test.js)  
+if you want more example, you can see [this](https://github.com/CocaCola183/validator-json/blob/4.1/test/test.js)  
 
 
 ## Note    
