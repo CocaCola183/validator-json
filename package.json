@@ -4,13 +4,12 @@
     "email": "s_f_dragon@163.com"
   },
   "name": "validator-json",
-  "version": "2.0.2",
+  "version": "2.0.6",
   "description": "Validator for javascript object data",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/test.js",
-    "cov": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/test.js -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "preinstall": "node ./scripts/preinstall.js"
+    "cov": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/test.js -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",

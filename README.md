@@ -18,7 +18,7 @@ now only validate for:
 ## Before you start  
 * node: 4.1.1  
 
-validator-json@2.0.0 only support node@4.0+
+validator-json@2.0 only support node@4.0+, if you use node@0.12-, you can use  validator-json@1.0
 
 ## Install  
 `npm install validator-json`
